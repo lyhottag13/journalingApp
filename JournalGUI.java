@@ -55,7 +55,6 @@ public class JournalGUI extends JFrame implements ActionListener {
         frame.setVisible(true);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setSize(new Dimension(500, 500));
-        System.out.println(entryList);
     }
 
     @Override
@@ -65,18 +64,20 @@ public class JournalGUI extends JFrame implements ActionListener {
                 JournalWriter.write(pane.getText());
                 entryList.add(pane.getText());
                 pane.setText("");
-            } else if (e.getSource() == finalButton || (pane.getText().equals("") && !entryList.getSelector().equals(""))) {
-                entryList.selectFinal();
-            } else if (e.getSource() == previousButton) {
-                entryList.selectPrevious();
-            } else if (e.getSource() == nextButton) {
-                entryList.selectNext();
-            } else if (e.getSource() == firstButton) {
-                entryList.selectFirst();
-            } else if (e.getSource() == deleteButton) {
-                entryList.delete();
+            } else {
+                if (e.getSource() == finalButton || (pane.getText().equals("") && !entryList.getSelector().equals(""))) {
+                    entryList.selectFinal();
+                } else if (e.getSource() == previousButton) {
+                    entryList.selectPrevious();
+                } else if (e.getSource() == nextButton) {
+                    entryList.selectNext();
+                } else if (e.getSource() == firstButton) {
+                    entryList.selectFirst();
+                } else if (e.getSource() == deleteButton) {
+                    entryList.delete();
+                }
+                pane.setText(entryList.getSelector());
             }
-            pane.setText(entryList.getSelector());
         } catch (Exception paneException) {
             pane.setText("");
         }
