@@ -2,16 +2,16 @@ import java.util.Scanner;
 import java.io.File;
 
 public class JournalList {
-    JournalNode<String> head;
-    JournalNode<String> tail;
-    JournalNode<String> selector;
+    JournalNode head;
+    JournalNode tail;
+    JournalNode selector;
     int index;
     
     public JournalList() {
         index = 0;
     }
     public void add(String entry) {
-        JournalNode<String> newEntry = new JournalNode<>(entry);
+        JournalNode newEntry = new JournalNode(entry);
         if (head == null) {
             head = newEntry;
             tail = head;
@@ -23,15 +23,6 @@ public class JournalList {
         selector = tail;
     }
     public void fillList() {
-        // File file = new File("output.txt");
-        // try (Scanner scan = new Scanner(file)) {
-        //     // scan.useDelimiter("#ENTRYBREAK#");
-        //     while (scan.hasNextLine()) {
-        //         String a = scan.nextLine();
-        //         this.add(a);
-        //     }
-        //     System.out.println(toString());
-        // } catch (Exception e) {}
         try (Scanner scan = new Scanner(new File("output.txt"))) {
             scan.useDelimiter("#ENTRYBREAK#");
             while (scan.hasNext()) {
@@ -87,7 +78,7 @@ public class JournalList {
             selector = tail;
         }
         JournalWriter.clear();
-        JournalNode<String> current = head;
+        JournalNode current = head;
         while (current != null) {
             JournalWriter.write(current.toString());
             current = current.next;
@@ -98,7 +89,7 @@ public class JournalList {
             return "";
         }
         StringBuffer output = new StringBuffer();
-        JournalNode<String> current = head;
+        JournalNode current = head;
         while (current != null) {
             output.append(current);
             current = current.next;
@@ -106,10 +97,10 @@ public class JournalList {
         return output.toString();
     }
 
-    private class JournalNode<E> {
+    private class JournalNode {
         private String entry;
-        private JournalNode<String> next;
-        private JournalNode<String> last;
+        private JournalNode next;
+        private JournalNode last;
         public JournalNode(String entry) {
             this.entry = entry;
         }
